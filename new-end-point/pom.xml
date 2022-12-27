@@ -13,13 +13,14 @@
 
     <groupId>hlx</groupId>
 
-    <artifactId>hello-world-rest-api</artifactId>
+    <artifactId>new-end-point</artifactId>
 
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>hello-world-rest-api</name><!--this is for kubernetes-->
+    <name>new-end-point</name><!--this is for kubernetes-->
 
-    <description>Demo project for Spring Boot</description>
+
+    <!--    <description>Demo project for Spring Boot</description>-->
 
     <properties>
         <java.version>17</java.version>
@@ -44,6 +45,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

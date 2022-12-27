@@ -1,4 +1,4 @@
-package hlx.helloworldrestapi;
+package hlx.microservices.helloworldrestapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

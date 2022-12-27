@@ -1,4 +1,4 @@
-package hlx.helloworldrestapi;
+package hlx.microservices.helloworldrestapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

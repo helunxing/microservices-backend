@@ -1,4 +1,4 @@
-package hlx.helloworldrestapi;
+package hlx.microservices.helloworldrestapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ public class HelloWorldController {
         return greeting;
     }
 
-    @GetMapping(path = "/hello-world-bean")
+    @GetMapping(path = "/hello-api")
     public HelloWorldBean helloWorldBean() {
         return new HelloWorldBean(greeting);
     }

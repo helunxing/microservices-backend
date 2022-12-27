@@ -1,4 +1,4 @@
-package hlx.helloworldrestapi;
+package hlx.microservices.helloworldrestapi;
 
 public class HelloWorldBean {
     private String message;
