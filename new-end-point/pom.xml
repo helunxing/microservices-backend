@@ -61,6 +61,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
 
                 <configuration>
+
+                    <mainClass>hlx.microservices.newendpoint.NewEndpointApplication</mainClass>
+
                     <image>
                         <name>helunxing/${project.artifactId}-server:${project.version}</name>
                     </image>
@@ -71,5 +74,3 @@
     </build>
 
 </project>
-
-

@@ -2,11 +2,17 @@
 
 ## note for deploy
 
+<https://github.com/in28minutes/spring-microservices-v2/tree/main/05.kubernetes>
+
 build image from maven
 
-`ducker run -p **:** [imageName:Version]`
-
 `docker push [imageName:Version]`
+
+create new deployment
+
+`kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE`
+
+change to a new image
 
 `kubectl set image deployment hello-world-rest-api hello-world-rest-api=[imageName:Version]`
 
