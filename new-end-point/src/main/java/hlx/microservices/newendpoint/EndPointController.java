@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -26,9 +27,10 @@ public class EndPointController {
 
     @GetMapping(path = "/point/{path}")
     public HelloMessage point(
-            @PathVariable String path) {
+            @PathVariable String path,
+            @RequestParam(value = "name", defaultValue = "World") String name) {
 
-        logger.info("path is {}", path);
+        logger.info("path is {}, name is {}", path, name);
 
         return proxy.retrieveExchangeValue(path);
     }
