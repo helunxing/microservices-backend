@@ -4,7 +4,7 @@
 
 <https://github.com/in28minutes/spring-microservices-v2/tree/main/05.kubernetes>
 
-build image from maven
+push image
 
 `docker push [imageName:Version]`
 
@@ -27,6 +27,8 @@ check difference
 apply set
 
 `kubectl apply -f deployment.yaml`
+
+delete set
 
 `kubectl delete all -l app=hello-world-rest-api`
 

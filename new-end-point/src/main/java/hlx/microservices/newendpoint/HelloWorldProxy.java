@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "hello-world-rest-api", url = "${HELLO_URI:http://localhost}:8000")
 public interface HelloWorldProxy {
 
-    @GetMapping("/hello-api")
+    @GetMapping("/hello-api/{path}")
     public HelloMessage retrieveExchangeValue(
-//            @PathVariable String from,
-//            @PathVariable String to
+            @PathVariable String path
     );
 
 }
