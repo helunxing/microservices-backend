@@ -19,6 +19,7 @@ public class Rows {
     }
 
     public Rows(long id, String key, String value) {
+        super();
         this.id = id;
         this.key = key;
         this.value = value;
