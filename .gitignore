@@ -1,0 +1,6 @@
+.idea
+.DS_Store
+.gradle
+venv
+gradle-project/gradle/wrapper/gradle-wrapper.jar
+__pycache__
