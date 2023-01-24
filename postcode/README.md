@@ -28,7 +28,7 @@ usually, raw room address in a same postcode, is like data above.
 this kind of data format is awkward, since the `<select>` label
 in html, will occupy too wide and too height position like this:
 
-![wide select label](readmePic/wide select.png)
+![wide select label](readmePic/long select.gif)
 
 to make data easy to use, the node converts raw data to this tree structured format below:
 

@@ -22,8 +22,6 @@ def read_root():
         que = list(filter(lambda line: line,
                           [addr[key] for key in order]))
 
-        print(que)
-
         curr = lines_tree
 
         for line in que:
