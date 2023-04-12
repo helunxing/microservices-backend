@@ -69,9 +69,9 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 8080
+    - port: 8000
       protocol: TCP
-      targetPort: 8080
+      targetPort: 8000
   selector:
     app: hello-world-rest-api
   sessionAffinity: None

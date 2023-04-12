@@ -11,7 +11,12 @@ public class RowDefaultData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        repository.save(new Rows());
-        System.out.println(repository.findAll());
+        //insert a auto update id record
+
+//        repository.save(new Rows("name1", "value1"));
+//        repository.save(new Rows(1, "rename", "revalue"));
+        for (Rows row : repository.findAll()) {
+            System.out.println(row);
+        }
     }
 }
