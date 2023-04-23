@@ -5,3 +5,4 @@ venv
 gradle-project/gradle/wrapper/gradle-wrapper.jar
 __pycache__
 *.iml
+postcode/postcode.iml
