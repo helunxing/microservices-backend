@@ -3,13 +3,10 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "3"
-  creationTimestamp: "2022-12-23T22:47:46Z"
-  generation: 5
   labels:
     app: hello-world-rest-api
   name: hello-world-rest-api
   namespace: default
-  resourceVersion: "187200"
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
@@ -24,12 +21,15 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: hello-world-rest-api
     spec:
       containers:
-        - image: helunxing/hello-world-rest-api-server:0.0.1-SNAPSHOT
+        - image: helunxing/hello-world-rest-api:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+              name: http
           imagePullPolicy: IfNotPresent
           name: hello-world-rest-api
           resources:
