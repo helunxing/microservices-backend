@@ -2,7 +2,7 @@
 
 ## goal
 
-this microservice node, return tree formatted mock address data, for front end using.
+This type of microservice node returns mock address data in a tree format for use by the front end.
 
 example:
 

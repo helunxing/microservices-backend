@@ -1,16 +1,21 @@
-from fastapi import FastAPI
-
+import os
 import json
 import queue
+from fastapi import FastAPI
 from os.path import dirname, abspath, join
+
+default_val = "default"
+env_val = os.getenv("ENV_VAR")
+val = env_val if env_val else default_val
 
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-
+@app.get("/{postcode}")
+async def read_root(postcode, secret_key=''):
+    # raw data is from:
     # https://api.getAddress.io/find/{postcode}?api-key={api-key}
+
     with open(join(dirname(abspath(__file__)), 'api_data/aparto.json')) as f:
         data = json.loads(f.read())
 
@@ -34,17 +39,10 @@ def read_root():
 
     while not que.empty():
         curr = que.get()
-        for key in curr.keys():
-            if not curr[key]:
-                curr[key] = ''
+        for secret_key in curr.keys():
+            if not curr[secret_key]:
+                curr[secret_key] = None
                 continue
-            que.put(curr[key])
+            que.put(curr[secret_key])
 
     return lines_tree
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
-
