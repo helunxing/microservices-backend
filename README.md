@@ -32,7 +32,7 @@ provide `/postcode/{queryPostCode}`
 
 ## Database tables
 
-User table, Event table, Join info table
+Contain: User table, Event table, Join info table
 
 SQL file: [schema.sql](schema.sql)
 
