@@ -1,4 +1,4 @@
-package timeag.backend.event.row;
+package timeag.backend.event.data;
 
 import jakarta.persistence.*;
 
@@ -9,8 +9,10 @@ public class Event {
     @Id
     private long id;
 
+
+//    @ManyToOne
     @Column(name = "creator_id")
-    private long creator_id;
+    private long creatorId;
 
     @Column(name = "date")
     private String date;
@@ -24,19 +26,19 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String title, long creator_id, String date, String timeOptions) {
+    public Event(long id, String title, long creatorId, String date, String timeOptions) {
         super();
         this.setId(id);
         this.setTitle(title);
-        this.setCreator_id(creator_id);
+        this.setCreatorId(creatorId);
         this.setDate(date);
         this.setTimeOptions(timeOptions);
     }
 
-    public Event(String title, long creator_id, String date, String timeOptions) {
+    public Event(String title, long creatorId, String date, String timeOptions) {
         super();
         this.setTitle(title);
-        this.setCreator_id(creator_id);
+        this.setCreatorId(creatorId);
         this.setDate(date);
         this.setTimeOptions(timeOptions);
     }
@@ -66,12 +68,12 @@ public class Event {
         this.title = value;
     }
 
-    public long getCreator_id() {
-        return creator_id;
+    public long getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator_id(long creator_id) {
-        this.creator_id = creator_id;
+    public void setCreatorId(long creator_id) {
+        this.creatorId = creator_id;
     }
 
     public String getDate() {
@@ -86,6 +88,6 @@ public class Event {
     public String toString() {
         return String.format(
                 "Rows [id=%s, title=%s, creator_id=%s, date=%s, timeOptions=%s]",
-                id, title, creator_id, date, timeOptions);
+                id, title, creatorId, date, timeOptions);
     }
 }

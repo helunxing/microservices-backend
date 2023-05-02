@@ -7,49 +7,50 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.logging.Logger;
 
-import timeag.backend.event.row.RowsJpaRepository;
-import timeag.backend.event.row.Event;
+import timeag.backend.event.data.EventJpaRepository;
+import timeag.backend.event.data.Event;
 
 @RestController
 public class EventController {
 
     @Autowired
-    private RowsJpaRepository repository;
+    private EventJpaRepository repository;
 
     @GetMapping(path = "/")
     public String root() {
         return "running";
     }
 
-    @GetMapping(path = "/feb/{path}")
+    @GetMapping(path = "/hello/{path}")
     public EventBean helloWorldBean(@PathVariable String path) {
         return new EventBean(String.format("hello %s ", path));
     }
 
     //    get data by id
-    @GetMapping(path = "/rows/{id}")
-    public Event getRow(@PathVariable long id) {
+    @GetMapping(path = "/event/{id}")
+    public Event getEvent(@PathVariable long id) {
         return repository.findById(id).get();
     }
 
     //    get data in json format
-    @GetMapping(path = "/rows")
-    public Iterable<Event> getRows() {
+    @GetMapping(path = "/event")
+    public Iterable<Event> getAllEvents() {
         return repository.findAll();
     }
 
     //    post request data in json body to insert a new row
-    @PostMapping(path = "/rows")
-    public ResponseEntity<Event> newRow(@RequestBody Event row) {
+    @PostMapping(path = "/event")
+    public ResponseEntity<Event> newEvent(@RequestBody Event event) {
 
-        System.out.println(row);
+        Logger.getLogger("newEvent").info(event.toString());
 
-        Event savedRow = repository.save(row);
+        Event savedEvent = repository.save(event);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedRow.getId())
+                .path("/event/{id}")
+                .buildAndExpand(savedEvent.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
 
