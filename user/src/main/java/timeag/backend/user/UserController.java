@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping(path = "/")
     public String root() {
-        return "runninga aaefe";
+        return "running";
     }
 
     @GetMapping(path = "/hello/{path}")
