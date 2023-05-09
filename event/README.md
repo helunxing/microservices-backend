@@ -2,6 +2,8 @@
 
 This microservice returns events data.
 
+Port set can find in [here](../README.md#local-urls).
+
 ## GET `/events`
 
 Get all events.
