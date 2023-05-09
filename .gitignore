@@ -4,3 +4,4 @@ venv
 __pycache__
 *.iml
 postcode/postcode.iml
+*.http
