@@ -1,8 +1,8 @@
 # Event Microservice
 
-This microservice returns events data.
+This microservice return events data and handle change request.
 
-Port set can find in [here](../README.md#local-urls).
+Default port number can find in [here](../README.md#local-urls).
 
 ## GET `/events`
 

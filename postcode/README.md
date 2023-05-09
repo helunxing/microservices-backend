@@ -2,6 +2,8 @@
 
 ## goal
 
+Default port number can find in [here](../README.md#local-urls).
+
 This type of microservice node returns mock address data in a tree format for use by the front end.
 
 example:
@@ -57,5 +59,3 @@ to make data easy to use, the node converts raw data to this tree structured for
 front end can use above data like below:
 
 ![tree format frontend](https://user-images.githubusercontent.com/37706103/214199063-3596f275-5222-47fb-ad79-ddaf7edd211c.gif)
-
-[testlink](../README.md#local-urls)
