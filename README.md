@@ -4,8 +4,6 @@
 
 ### [Event Microservice](event/README.md)
 
-returns events data
-
 GET `/events`
 
 POST `/event`
