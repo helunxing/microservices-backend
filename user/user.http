@@ -1,8 +1,0 @@
-### Send POST request with json body
-POST http://localhost:8100/user
-Content-Type: application/json
-
-{
-  "subId": "subId222",
-  "loginKey": "randomKey"
-}
