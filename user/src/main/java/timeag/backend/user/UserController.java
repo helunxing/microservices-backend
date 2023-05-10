@@ -2,11 +2,13 @@ package timeag.backend.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import timeag.backend.user.data.UserJpaRepository;
@@ -15,12 +17,17 @@ import timeag.backend.user.data.User;
 @RestController
 public class UserController {
 
+    private ResponseEntity<Object> NotFoundEntity() {
+        // BFF layer only read the status code, "not found" is just a reminder for user.
+        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+    }
+
     @Autowired
     private UserJpaRepository repository;
 
     @GetMapping(path = "/")
     public String root() {
-        return "running";
+        return "user microservice running";
     }
 
     @GetMapping(path = "/hello/{path}")
@@ -30,14 +37,22 @@ public class UserController {
 
     //    get data by id
     @GetMapping(path = "/user/{id}")
-    public User getUser(@PathVariable long id) {
-        return repository.findById(id).get();
+    public ResponseEntity<Object> getUser(@PathVariable long id) {
+        Optional<User> findResult = repository.findById(id);
+        if (findResult.isEmpty()) {
+            return NotFoundEntity();
+        }
+        return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
 
     //    get data in json format
-    @GetMapping(path = "/user")
-    public Iterable<User> getAllUser() {
-        return repository.findAll();
+    @GetMapping(path = "/users")
+    public ResponseEntity<Object> getAllUser() {
+        Iterable<User> allUser = repository.findAll();
+        if (!allUser.iterator().hasNext()) {
+            return NotFoundEntity();
+        }
+        return new ResponseEntity<>(allUser, HttpStatus.OK);
     }
 
     //    post request data in json body to insert a new row
