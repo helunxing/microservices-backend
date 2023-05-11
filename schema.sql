@@ -1,3 +1,9 @@
+drop table if exists join_table;
+drop sequence if exists join_id_seq;
+
+drop table if exists event_table;
+drop sequence if exists event_id_seq;
+
 drop table if exists user_table;
 drop sequence if exists user_id_seq;
 
@@ -10,9 +16,6 @@ create table user_table
     login_key varchar(255),
     primary key (id)
 );
-
-drop table if exists event_table;
-drop sequence if exists event_id_seq;
 
 create sequence event_id_seq start 1
     increment 1;
@@ -27,9 +30,6 @@ create table event_table
     constraint fk_creator_id
         foreign key (creator_id) references user_table (id)
 );
-
-drop table if exists join_table;
-drop sequence if exists join_id_seq;
 
 create sequence join_id_seq start 1
     increment 1;
