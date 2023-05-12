@@ -4,13 +4,25 @@
 
 ### [Event Microservice](event/README.md)
 
+Provide:
+
 GET `/events`
 
 POST `/event`
 
 GET, PUT, DELETE `/event/{eventId}`
 
+### [User Microservice](user/README.md)
+
+Provide:
+
+GET `/users`
+
+POST `/user`
+
 ### [Join Info Microservice]()
+
+Provide:
 
 GET, POST, PUT, DELETE `/join/{eventId}`
 
@@ -20,13 +32,17 @@ GET `/user/joined/{userSub}`
 
 go语言 graphQL权限检查器
 
+Provide:
+
 GET `/key/{userKey}`
 
 ### [Postcode Microservice](postcode/README.md)
 
 returns mock address data in a tree format for use by the front end.
 
-provide `/postcode/{queryPostCode}`
+Provide:
+
+GET `/postcode/{queryPostCode}`
 
 ## Database tables
 
