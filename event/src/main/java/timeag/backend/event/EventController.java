@@ -2,6 +2,7 @@ package timeag.backend.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,6 +15,11 @@ import timeag.backend.event.data.Event;
 
 @RestController
 public class EventController {
+
+    private ResponseEntity<Object> NotFoundEntity() {
+        // BFF layer only read the status code, "not found" is just a reminder for user.
+        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+    }
 
     @Autowired
     private EventJpaRepository repository;
@@ -35,9 +41,13 @@ public class EventController {
     }
 
     //    get data in json format
-    @GetMapping(path = "/event")
-    public Iterable<Event> getAllEvents() {
-        return repository.findAll();
+    @GetMapping(path = "/events")
+    public ResponseEntity<Object> getAllEvents() {
+        Iterable<Event> allEvent = repository.findAll();
+        if(allEvent.iterator().hasNext()) {
+            return new ResponseEntity<>(allEvent, HttpStatus.OK);
+        }
+        return NotFoundEntity();
     }
 
     //    post request data in json body to insert a new row
