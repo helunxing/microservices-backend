@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import timeag.backend.event.data.EventJpaRepository;
@@ -15,6 +16,11 @@ import timeag.backend.event.data.Event;
 
 @RestController
 public class EventController {
+
+    private ResponseEntity<Object> WrongFormatEntity() {
+        // BFF layer only read the status code, "not found" is just a reminder for user.
+        return new ResponseEntity<>("Your request format wrong", HttpStatus.PRECONDITION_FAILED);
+    }
 
     private ResponseEntity<Object> NotFoundEntity() {
         // BFF layer only read the status code, "not found" is just a reminder for user.
@@ -29,22 +35,31 @@ public class EventController {
         return "running";
     }
 
-    @GetMapping(path = "/hello/{path}")
-    public EventBean helloWorldBean(@PathVariable String path) {
-        return new EventBean(String.format("hello %s ", path));
-    }
-
     //    get data by id
     @GetMapping(path = "/event/{id}")
-    public Event getEvent(@PathVariable long id) {
-        return repository.findById(id).get();
+    public ResponseEntity<Object> getEvent(@PathVariable String id) {
+        long longId = 0;
+
+        try {
+            longId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return WrongFormatEntity();
+        }
+
+        Optional<Event> findResult = repository.findById(longId);
+
+        if (findResult.isEmpty()) {
+            return NotFoundEntity();
+        }
+
+        return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
 
     //    get data in json format
     @GetMapping(path = "/events")
     public ResponseEntity<Object> getAllEvents() {
         Iterable<Event> allEvent = repository.findAll();
-        if(allEvent.iterator().hasNext()) {
+        if (allEvent.iterator().hasNext()) {
             return new ResponseEntity<>(allEvent, HttpStatus.OK);
         }
         return NotFoundEntity();
