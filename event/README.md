@@ -33,6 +33,23 @@ HTTP/1.1 404
 
 Create a new event.
 
+Demo request:
+```http request
+POST http://localhost:8000/event
+Content-Type: application/json
+
+{
+"creatorId": 1,
+"title": "Event 1",
+"date": "2019-01-01",
+"timeOptions": "Event 1 timeOptions"
+}
+```
+Correspond respond:
+```
+HTTP/1.1 201
+```
+
 ## GET `/event/{eventId}`
 
 Get event by id. 
