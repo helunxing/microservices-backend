@@ -15,10 +15,27 @@ GET http://localhost:8000/events
 Content-Type: application/json
 ```
 
-Correspond respond if no data:
+Correspond respond data:
 
 ```
+HTTP/1.1 200 
 
+[
+  {
+    "id": 10,
+    "creatorId": 1,
+    "date": "2019-01-01",
+    "timeOptions": "Event 1 timeOptions",
+    "title": "Event 1"
+  },
+  {
+    "id": 11,
+    "creatorId": 1,
+    "date": "2019-01-01",
+    "timeOptions": "Event 1 timeOptions",
+    "title": "Event 1"
+  }
+]
 ```
 
 Correspond respond if no data:
@@ -27,13 +44,12 @@ Correspond respond if no data:
 HTTP/1.1 404
 ```
 
-
-
 ## POST `/event`
 
 Create a new event.
 
 Demo request:
+
 ```http request
 POST http://localhost:8000/event
 Content-Type: application/json
@@ -45,14 +61,37 @@ Content-Type: application/json
 "timeOptions": "Event 1 timeOptions"
 }
 ```
+
 Correspond respond:
+
 ```
 HTTP/1.1 201
 ```
 
 ## GET `/event/{eventId}`
 
-Get event by id. 
+Get event by id.
+
+Demo request:
+
+```http request
+GET http://localhost:8000/event/10
+Content-Type: application/json
+```
+
+Correspond respond:
+
+```
+HTTP/1.1 200
+
+{
+"id": 10,
+"creatorId": 1,
+"date": "2019-01-01",
+"timeOptions": "Event 1 timeOptions",
+"title": "Event 1"
+}
+```
 
 ## PUT `/event/{eventId}`
 
