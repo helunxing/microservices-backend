@@ -93,6 +93,12 @@ HTTP/1.1 200
 }
 ```
 
+Correspond respond if no data:
+```
+HTTP/1.1 404
+
+Not Found
+```
 ## PUT `/event/{eventId}`
 
 Update event by id. No need to get user info.
