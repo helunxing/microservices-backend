@@ -82,22 +82,31 @@ public class EventController {
     }
 
     @PutMapping(path = "/event/{id}")
-    public ResponseEntity<Object> updateEvent(@PathVariable String id) {
+    public ResponseEntity<Object> updateEvent(@PathVariable String id, @RequestBody Event event) {
         long longId = 0;
 
-//        try {
-//            longId = Long.parseLong(id);
-//        } catch (NumberFormatException e) {
-//            return WrongFormatEntity();
-//        }
-//
-//        Optional<Event> findResult = repository.findById(longId);
-//
-//        if (findResult.isEmpty()) {
-//            return NotFoundEntity();
-//        }
-//
-//        return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
+        try {
+            longId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return WrongFormatEntity();
+        }
+
+        Optional<Event> findResult = repository.findById(longId);
+
+        if (findResult.isEmpty()) {
+            return NotFoundEntity();
+        }
+
+        event.setId(longId);
+
+        Event savedEvent = repository.save(event);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/event/{id}")
+                .buildAndExpand(savedEvent.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
+
     }
 
 }
