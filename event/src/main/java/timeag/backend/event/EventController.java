@@ -109,4 +109,19 @@ public class EventController {
 
     }
 
+    @DeleteMapping(path = "/event/{id}")
+    public ResponseEntity<Object> deleteEvent(@PathVariable String id) {
+        long longId = 0;
+
+        try {
+            longId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return WrongFormatEntity();
+        }
+
+        repository.deleteById(longId);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 }
