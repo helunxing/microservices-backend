@@ -101,7 +101,32 @@ Not Found
 ```
 ## PUT `/event/{eventId}`
 
-Update event by id. No need to get user info.
+Update event by id.
+
+Demo request:
+```http request
+PUT http://localhost:8000/event/10
+Content-Type: application/json
+
+{
+  "creatorId": 1,
+  "title": "Event2935",
+  "date": "2022-12-22",
+  "timeOptions": "Event 235"
+}
+```
+
+Correspond respond:
+```
+HTTP/1.1 201
+```
+
+Correspond respond if no data:
+```
+HTTP/1.1 404
+
+Not Found
+```
 
 ## DELETE `/event/{eventId}`
 
