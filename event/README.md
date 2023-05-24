@@ -131,3 +131,13 @@ Not Found
 ## DELETE `/event/{eventId}`
 
 Delete event by id.
+
+Demo request:
+```http request
+DELETE http://localhost:8000/event/10
+```
+
+Correspond respond:
+```
+HTTP/1.1 200
+```
