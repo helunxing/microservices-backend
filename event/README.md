@@ -4,7 +4,9 @@ This microservice return events data and handle change request.
 
 Default port number can find in [here](../README.md#local-urls).
 
-## GET `/events`
+## `/events`
+
+### GET `/events`
 
 Get all events.
 
@@ -44,7 +46,9 @@ Correspond respond if no data:
 HTTP/1.1 404
 ```
 
-## POST `/event`
+## `/event`
+
+### POST `/event`
 
 Create a new event.
 
@@ -68,7 +72,7 @@ Correspond respond:
 HTTP/1.1 201
 ```
 
-## GET `/event/{eventId}`
+### GET `/event/{eventId}`
 
 Get event by id.
 
@@ -94,16 +98,19 @@ HTTP/1.1 200
 ```
 
 Correspond respond if no data:
+
 ```
 HTTP/1.1 404
 
 Not Found
 ```
-## PUT `/event/{eventId}`
+
+### PUT `/event/{eventId}`
 
 Update event by id.
 
 Demo request:
+
 ```http request
 PUT http://localhost:8000/event/10
 Content-Type: application/json
@@ -117,27 +124,31 @@ Content-Type: application/json
 ```
 
 Correspond respond:
+
 ```
 HTTP/1.1 201
 ```
 
 Correspond respond if no data:
+
 ```
 HTTP/1.1 404
 
 Not Found
 ```
 
-## DELETE `/event/{eventId}`
+### DELETE `/event/{eventId}`
 
 Delete event by id.
 
 Demo request:
+
 ```http request
 DELETE http://localhost:8000/event/10
 ```
 
 Correspond respond:
+
 ```
 HTTP/1.1 200
 ```
