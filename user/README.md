@@ -14,8 +14,6 @@ Content-Type: application/json
 correspond respond:
 
 ```
-HTTP/1.1 201
-Location: http://localhost:8100/user/user/1
 ```
 
 ## `/user`
