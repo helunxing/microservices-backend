@@ -32,10 +32,34 @@ public class EventController {
 
     @GetMapping(path = "/")
     public String root() {
-        return "running";
+        return "event microservice running";
     }
 
-    //    get data by id
+    @GetMapping(path = "/events")
+    public ResponseEntity<Object> getAllEvents() {
+        Iterable<Event> allEvent = repository.findAll();
+        if (!allEvent.iterator().hasNext()) {
+            return NotFoundEntity();
+        }
+        return new ResponseEntity<>(allEvent, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/event")
+    public ResponseEntity<Event> newEvent(@RequestBody Event event) {
+
+        Logger.getLogger("newEvent").info(event.toString());
+
+        Event savedEvent = repository.save(event);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/event/{id}")
+                .buildAndExpand(savedEvent.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+
+    }
+
     @GetMapping(path = "/event/{id}")
     public ResponseEntity<Object> getEvent(@PathVariable String id) {
         long longId = 0;
@@ -55,31 +79,6 @@ public class EventController {
         return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
 
-    //    get data in json format
-    @GetMapping(path = "/events")
-    public ResponseEntity<Object> getAllEvents() {
-        Iterable<Event> allEvent = repository.findAll();
-        if (allEvent.iterator().hasNext()) {
-            return new ResponseEntity<>(allEvent, HttpStatus.OK);
-        }
-        return NotFoundEntity();
-    }
-
-    //    post request data in json body to insert a new row
-    @PostMapping(path = "/event")
-    public ResponseEntity<Event> newEvent(@RequestBody Event event) {
-
-        Logger.getLogger("newEvent").info(event.toString());
-
-        Event savedEvent = repository.save(event);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/event/{id}")
-                .buildAndExpand(savedEvent.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
-
-    }
 
     @PutMapping(path = "/event/{id}")
     public ResponseEntity<Object> updateEvent(@PathVariable String id, @RequestBody Event event) {
