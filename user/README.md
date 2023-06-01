@@ -18,6 +18,16 @@ Content-Type: application/json
 correspond respond:
 
 ```
+HTTP/1.1 200 
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "subId": "subId222",
+    "loginKey": "randomKey"
+  }
+]
 ```
 
 ## `/user`
