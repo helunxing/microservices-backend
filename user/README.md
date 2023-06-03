@@ -19,7 +19,7 @@ correspond respond:
 
 ```
 HTTP/1.1 200 
-Content-Type: application/json
+Content-Type: application/json 
 
 [
   {
@@ -49,6 +49,8 @@ Content-Type: application/json
 correspond respond:
 
 ```
+HTTP/1.1 201 
+Location: http://localhost:8100/user/user/1
 ```
 
 ### GET `/user/{userId}`
@@ -63,6 +65,13 @@ Content-Type: application/json
 correspond respond:
 
 ```
+HTTP/1.1 200 
+
+{
+  "id": 1,
+  "subId": "subId222",
+  "loginKey": "randomKey"
+}
 ```
 
 ### PUT `/user/{userId}`
@@ -70,13 +79,20 @@ correspond respond:
 Demo request:
 
 ```http request
-GET http://localhost:8100/user/1
+PUT http://localhost:8100/user/1
 Content-Type: application/json
+
+{
+  "subId": "subIdUpdated",
+  "loginKey": "keyUpdated"
+}
 ```
 
 correspond respond:
 
 ```
+HTTP/1.1 201 
+Location: http://localhost:8100/user/1/user/1
 ```
 
 ### DELETE `/user/{userId}`
