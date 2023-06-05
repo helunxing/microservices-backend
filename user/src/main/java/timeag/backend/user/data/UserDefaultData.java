@@ -15,7 +15,7 @@ public class UserDefaultData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        repository.save(new Event("tt", 1, "dt", "timeOptions"));
+        repository.save(new User("fortest_subId", "fortest_loginKey"));
         Logger.getLogger("UserDefaultData").info("----------------ALL DATA---------------");
         for (User user : repository.findAll()) {
             Logger.getLogger("UserDefaultData").info(user.toString());
