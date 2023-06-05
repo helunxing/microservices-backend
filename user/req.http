@@ -1,0 +1,46 @@
+### should be 404
+GET http://localhost:8100/users
+
+### should be 201
+POST http://localhost:8100/user
+Content-Type: application/json
+
+{
+  "subId": "subId222",
+  "loginKey": "randomKey"
+}
+
+> {%
+    client.global.set ("user_addr", response.headers.valueOf("location"));
+%}
+
+### should be 200, and data same with above
+GET {{user_addr}}
+
+### should be 404
+GET http://localhost:8100/user/15
+
+### should be 201
+PUT {{user_addr}}
+
+{
+  "subId": "subIdUpdated",
+  "loginKey": "keyUpdated"
+}
+
+### should be 404
+PUT http://localhost:8100/user/15
+
+{
+  "subId": "subIdUpdated",
+  "loginKey": "keyUpdated"
+}
+
+### should be 200, and data same with above
+GET {{user_addr}}
+
+### should be 200
+DELETE {{user_addr}}
+
+### should be 404
+GET {{user_addr}}

@@ -1,0 +1,65 @@
+### should be 404
+GET http://localhost:8000/event/1
+Content-Type: application/json
+
+### should be 201. Prerequisite: user with id 1 should exist
+POST http://localhost:8000/event
+Content-Type: application/json
+
+{
+  "creatorId": 1,
+  "title": "Event 1",
+  "date": "2019-01-01",
+  "timeOptions": "Event 1 timeOptions"
+}
+
+> {%
+    client.global.set ("event_addr", response.headers.valueOf("location"));
+%}
+
+### should be 200
+GET http://localhost:8000/events
+Content-Type: application/json
+
+### should be 200, and data same with above
+GET {{event_addr}}
+Content-Type: application/json
+
+### should be 404
+GET http://localhost:8000/event/14
+Content-Type: application/json
+
+### should be 201
+PUT {{event_addr}}
+Content-Type: application/json
+
+{
+  "creatorId": 1,
+  "title": "Event2935",
+  "date": "2022-12-22",
+  "timeOptions": "Event 235"
+}
+
+
+### should be 200, and data same with above
+GET {{event_addr}}
+Content-Type: application/json
+
+### should be 404
+PUT http://localhost:8000/event/15
+Content-Type: application/json
+
+{
+  "creatorId": 1,
+  "title": "Event 1",
+  "date": "2019-01-01",
+  "timeOptions": "Event 1 timeOptions"
+}
+
+### should be 200
+DELETE {{event_addr}}
+Content-Type: application/json
+
+### should be 404
+GET {{event_addr}}
+Content-Type: application/json
