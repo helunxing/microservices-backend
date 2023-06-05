@@ -52,7 +52,7 @@ public class UserController {
         User savedUser = repository.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/user/{id}")
+                .path("/{id}")
                 .buildAndExpand(savedUser.getId())
                 .toUri();
 
@@ -100,7 +100,7 @@ public class UserController {
         User savedUser = repository.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/user/{id}")
+                .path("/{id}")
                 .buildAndExpand(savedUser.getId())
                 .toUri();
 

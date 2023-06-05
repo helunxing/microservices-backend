@@ -52,6 +52,7 @@ public class EventController {
         Event savedEvent = repository.save(event);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
                 .buildAndExpand(savedEvent.getId())
                 .toUri();
 
@@ -100,6 +101,7 @@ public class EventController {
         Event savedEvent = repository.save(event);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
                 .buildAndExpand(savedEvent.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
