@@ -46,6 +46,8 @@ Correspond respond if no data:
 HTTP/1.1 404
 ```
 
+maybe return 404 is not a good idea?
+
 ## `/event`
 
 ### POST `/event`
