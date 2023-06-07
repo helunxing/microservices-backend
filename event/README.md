@@ -18,6 +18,8 @@ Get all events.
 
 Create a new event.
 
+## `/event/{eventId}`
+
 ### GET `/event/{eventId}`
 
 Get event by id.
