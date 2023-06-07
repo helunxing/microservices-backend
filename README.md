@@ -2,7 +2,7 @@
 
 ## Tasks of Microservices and their API offerings
 
-### [Event Microservice](event/README.md)
+### [Event Microservice](./event)
 
 Provide:
 
@@ -12,7 +12,7 @@ POST `/event`
 
 GET, PUT, DELETE `/event/{eventId}`
 
-### [User Microservice](user/README.md)
+### [User Microservice](./user)
 
 Provide:
 
@@ -20,11 +20,15 @@ GET `/users`
 
 POST `/user`
 
-### [Join Info Microservice]()
+GET, PUT, DELETE `/user/{userId}`
+
+### [Join Info Microservice](./joinInfo)
 
 Provide:
 
-GET, POST, PUT, DELETE `/join/{eventId}`
+POST `/join`
+
+GET, PUT, DELETE `/join/{eventId}`
 
 GET `/user/joined/{userSub}`
 
