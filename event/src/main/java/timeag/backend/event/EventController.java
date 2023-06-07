@@ -39,6 +39,7 @@ public class EventController {
     public ResponseEntity<Object> getAllEvents() {
         Iterable<Event> allEvent = repository.findAll();
         if (!allEvent.iterator().hasNext()) {
+//            maybe return 404 is not a good idea?
             return NotFoundEntity();
         }
         return new ResponseEntity<>(allEvent, HttpStatus.OK);
@@ -78,7 +79,6 @@ public class EventController {
 
         return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
-
 
     @PutMapping(path = "/event/{id}")
     public ResponseEntity<Object> updateEvent(@PathVariable String id, @RequestBody Event event) {
