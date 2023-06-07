@@ -18,7 +18,7 @@ Content-Type: application/json
 GET {{user_addr}}
 
 ### should be 404
-GET http://localhost:8100/user/15
+GET http://localhost:8100/user/15990
 
 ### should be 201
 PUT {{user_addr}}
