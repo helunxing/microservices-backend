@@ -32,7 +32,7 @@ GET, PUT, DELETE `/join/{eventId}`
 
 GET `/user/joined/{userSub}`
 
-### [Identity Check]()
+### [Identity Check](./identityCheck)
 
 go语言 graphQL权限检查器
 
@@ -40,7 +40,7 @@ Provide:
 
 GET `/key/{userKey}`
 
-### [Postcode Microservice](postcode/README.md)
+### [Postcode Microservice](./postcode)
 
 returns mock address data in a tree format for use by the front end.
 
@@ -56,17 +56,15 @@ SQL file: [schema.sql](schema.sql)
 
 ## Local URLs
 
-hello service
+event service: <http://localhost:8000/>
 
-<http://localhost:8000/hello-api/{path}>
+user service: <http://localhost:8100/>
 
-endpoint service
+join info service: <http://localhost:8200/>
 
-<http://localhost:8100/point/{path}>
 
-python postcode services
 
-<http://localhost:8002/>
+python postcode services: <http://localhost:8002/>
 
 ## Note for deploy
 
