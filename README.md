@@ -62,9 +62,7 @@ user service: <http://localhost:8100/>
 
 join info service: <http://localhost:8200/>
 
-
-
-python postcode services: <http://localhost:8002/>
+python postcode services: <http://localhost:8020/>
 
 ## Note for deploy
 
