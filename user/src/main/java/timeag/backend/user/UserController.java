@@ -1,7 +1,5 @@
 package timeag.backend.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +15,11 @@ import timeag.backend.user.data.User;
 @RestController
 public class UserController {
 
-    private ResponseEntity<Object> WrongFormatEntity() {
-        // BFF layer only read the status code, "not found" is just a reminder for user.
-        return new ResponseEntity<>("Your request format wrong", HttpStatus.PRECONDITION_FAILED);
-    }
+    private final UserJpaRepository repository;
 
-    private ResponseEntity<Object> NotFoundEntity() {
-        // BFF layer only read the status code, "not found" is just a reminder for user.
-        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+    public UserController(UserJpaRepository repository) {
+        this.repository = repository;
     }
-
-    @Autowired
-    private UserJpaRepository repository;
 
     @GetMapping(path = "/")
     public String root() {
@@ -39,7 +30,7 @@ public class UserController {
     public ResponseEntity<Object> getAllUser() {
         Iterable<User> allUser = repository.findAll();
         if (!allUser.iterator().hasNext()) {
-            return NotFoundEntity();
+            return Responses.NotFoundEntity();
         }
         return new ResponseEntity<>(allUser, HttpStatus.OK);
     }
@@ -61,41 +52,27 @@ public class UserController {
     }
 
     @GetMapping(path = "/user/{id}")
-    public ResponseEntity<Object> getUser(@PathVariable String id) {
-        long longId = 0;
+    public ResponseEntity<Object> getUser(@PathVariable long id) {
 
-        try {
-            longId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            return WrongFormatEntity();
-        }
-
-        Optional<User> findResult = repository.findById(longId);
+        Optional<User> findResult = repository.findById(id);
 
         if (findResult.isEmpty()) {
-            return NotFoundEntity();
+            return Responses.NotFoundEntity();
         }
 
         return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
 
     @PutMapping(path = "/user/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable String id, @RequestBody User user) {
-        long longId = 0;
+    public ResponseEntity<Object> updateUser(@PathVariable long id, @RequestBody User user) {
 
-        try {
-            longId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            return WrongFormatEntity();
-        }
-
-        Optional<User> findResult = repository.findById(longId);
+        Optional<User> findResult = repository.findById(id);
 
         if (findResult.isEmpty()) {
-            return NotFoundEntity();
+            return Responses.NotFoundEntity();
         }
 
-        user.setId(longId);
+        user.setId(id);
 
         User savedUser = repository.save(user);
 
@@ -108,16 +85,8 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/user/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable String id) {
-        long longId = 0;
-
-        try {
-            longId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            return WrongFormatEntity();
-        }
-
-        repository.deleteById(longId);
+    public ResponseEntity<Object> deleteUser(@PathVariable long id) {
+        repository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
