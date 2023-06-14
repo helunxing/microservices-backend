@@ -1,0 +1,30 @@
+### should be 201
+POST localhost:8200/joinInfo
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "eventId": "1"
+}
+
+> {%
+    client.global.set ("join_addr", response.headers.valueOf("location"));
+%}
+
+### should be 200
+GET {{join_addr}}
+
+### should be 201
+PUT {{join_addr}}
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "eventId": "2"
+}
+
+### should be 200
+GET {{join_addr}}
+
+### should be 200
+DELETE {{join_addr}}
