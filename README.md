@@ -64,6 +64,8 @@ join info service: <http://localhost:8200/>
 
 python postcode services: <http://localhost:8020/>
 
+identity check service: <http://localhost:8030/>
+
 ## Note for deploy
 
 <https://github.com/in28minutes/spring-microservices-v2/tree/main/05.kubernetes>

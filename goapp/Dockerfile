@@ -12,6 +12,6 @@ RUN go get goapp
 
 RUN go build -o /docker-gs-ping
 
-EXPOSE 8000
+EXPOSE 8030
 
 CMD [ "/docker-gs-ping" ]
