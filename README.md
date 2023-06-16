@@ -3,7 +3,7 @@
 This introduction is for the Time Agreement web app project,
 specifically its Backend part.
 
-This project is deployed at: <https://hlx.codes>
+The project is deployed at: <https://hlx.codes>
 
 Other parts introduction for this project:
 
@@ -12,6 +12,8 @@ Other parts introduction for this project:
 [Backend for Frontend part & overall introduction](https://github.com/helunxing/heroku-page)
 
 ## Tasks of Microservices and their API offerings
+
+Microservices backend part contains 5 microservices, here is their tasks and API offerings:
 
 ### [Event Microservice](./event)
 
