@@ -21,7 +21,7 @@ The following are introduction of them and the API they provide.
 
 ### [Event Microservice](./event)
 
-Event microservice return events data and handle change request.
+Event microservice handle events data and handle change request.
 
 Unit test for every http api can find in [here](./event/req.http).
 
@@ -35,7 +35,7 @@ GET, PUT, DELETE `/event/{eventId}`
 
 ### [User Microservice](./user)
 
-User microservice return users data and handle change request.
+User microservice handle users data and handle change request.
 
 Unit test for every http api can find in [here](./user/req.http).
 
