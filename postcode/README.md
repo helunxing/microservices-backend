@@ -2,8 +2,6 @@
 
 ## goal
 
-Default port number can find in [here](../README.md#local-urls).
-
 This type of microservice node returns mock address data in a tree format for use by the front end.
 
 example:
