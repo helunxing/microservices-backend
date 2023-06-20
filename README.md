@@ -64,12 +64,12 @@ Provide:
 GET `/key/{userKey}`
 
 ### [Postcode Microservice](./postcode)
-
-returns mock address data in a tree format for use by the front end. [More introduction](./postcode).
+ 
+[More introduction](./postcode).
 
 Provide:
 
-GET `/postcode/{queryPostCode}`
+GET `/postcode/{queryPostCode}`: return tree format address data.
 
 ## Database tables
 
