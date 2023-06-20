@@ -21,41 +21,39 @@ The following are introduction of them and the API they provide.
 
 ### [Event Microservice](./event)
 
-Event microservice handle events data and handle change request.
-
 Unit test for every http api can find in [here](./event/req.http).
 
 Provide:
 
-GET `/events`
+GET `/events`: list all public events
 
-POST `/event`
+POST `/event`: create new event.
 
-GET, PUT, DELETE `/event/{eventId}`
+GET, PUT, DELETE `/event/{eventId}`: get, edit, delete event by id.
 
 ### [User Microservice](./user)
-
-User microservice handle users data and handle change request.
 
 Unit test for every http api can find in [here](./user/req.http).
 
 Provide:
 
-GET `/users`
+GET `/users`: list all users.
 
-POST `/user`
+POST `/user`: create new user.
 
-GET, PUT, DELETE `/user/{userId}`
+GET, PUT, DELETE `/user/{userId}`: get, edit, delete user by user ID.
 
 ### [Join Info Microservice](./joinInfo)
 
+Unit test for every http api can find in [here](./joinInfo/req.http).
+
 Provide:
 
-POST `/join`
+POST `/join`: create new join info.
 
-GET, PUT, DELETE `/join/{eventId}`
+GET, PUT, DELETE `/join/{eventId}`: get, edit, delete join info.
 
-GET `/user/joined/{userSub}`
+GET `/user/joined/{userSub}`: get all events the certain user joined.
 
 ### [Identity Check](./identityCheck)
 
@@ -67,7 +65,7 @@ GET `/key/{userKey}`
 
 ### [Postcode Microservice](./postcode)
 
-returns mock address data in a tree format for use by the front end.
+returns mock address data in a tree format for use by the front end. [More introduction](./postcode).
 
 Provide:
 
