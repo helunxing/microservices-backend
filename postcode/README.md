@@ -23,15 +23,14 @@ example:
 ……
 ```
 
-usually, raw room address in a same postcode, is like data above.
+usually, raw room address in a same postcode, is like data above. (from <https://getaddress.io/>)
 
 this kind of data format is awkward, since the `<select>` label
 in html, will occupy too wide and too height position like this:
 
 ![long select](https://user-images.githubusercontent.com/37706103/214199075-6eb598db-2171-4a56-ae8d-bc07ab5be21e.gif)
 
-
-to make data easy to use, the node converts raw data to this tree structured format below:
+to make data easy to use, this microservice converts raw data to this tree structured format below:
 
 ```
 "145 Kelvinhaugh Street": "",
