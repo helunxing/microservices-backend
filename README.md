@@ -13,7 +13,10 @@ Other parts introduction for this project:
 
 ## Tasks of Microservices and their API offerings
 
-Microservices backend part contains 5 microservices, here is their tasks and API offerings:
+Microservices backend part contains 5 microservices.
+Their running port number can find in [here](#local-urls).
+
+The following are introduction of them and the API they provide.
 
 ### [Event Microservice](./event)
 
@@ -28,8 +31,6 @@ GET, PUT, DELETE `/event/{eventId}`
 ### [User Microservice](./user)
 
 User microservice return users data and handle change request.
-
-Default port number can find in [here](#local-urls).
 
 Unit test for every http api can find in [here](./user/req.http).
 
