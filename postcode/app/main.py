@@ -11,6 +11,11 @@ val = env_val if env_val else default_val
 app = FastAPI()
 
 
+@app.get("/")
+def running_notice():
+    return "postcode microservice running"
+
+
 @app.get("/{postcode}")
 async def read_root(postcode, secret_key=''):
     # raw data is from:
