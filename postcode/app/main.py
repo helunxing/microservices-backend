@@ -1,7 +1,10 @@
 import os
 import json
 import queue
+import random
+
 from fastapi import FastAPI
+from loguru import logger
 from os.path import dirname, abspath, join
 
 default_val = "default"
@@ -21,7 +24,12 @@ async def read_root(postcode, secret_key=''):
     # raw data is from:
     # https://api.getAddress.io/find/{postcode}?api-key={api-key}
 
-    with open(join(dirname(abspath(__file__)), 'api_data/aparto.json')) as f:
+    data_folder = os.path.join(dirname(abspath(__file__)), "api_data")
+    files = os.listdir(data_folder)
+    select_file = random.choice(files)
+    logger.info("select_file: {}".format(select_file))
+
+    with open(os.path.join(data_folder, select_file)) as f:
         data = json.loads(f.read())
 
     order = ["line_4", "line_3", "line_2", "line_1", ]

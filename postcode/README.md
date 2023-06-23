@@ -3,6 +3,8 @@
 ## goal
 
 This type of microservice node returns mock address data in a tree format for use by the front end.
+I did not buy access to the real postcode query API.
+Now no matter what zip code is queried, it randomly returns one of the three real addresses I downloaded.
 
 example:
 
