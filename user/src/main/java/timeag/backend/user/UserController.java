@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -35,22 +36,6 @@ public class UserController {
         return new ResponseEntity<>(allUser, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/user")
-    public ResponseEntity<User> newUser(@RequestBody User user) {
-
-        Logger.getLogger("newUser").info(user.toString());
-
-        User savedUser = repository.save(user);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedUser.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
-
-    }
-
     @GetMapping(path = "/user/{id}")
     public ResponseEntity<Object> getUser(@PathVariable long id) {
 
@@ -61,6 +46,35 @@ public class UserController {
         }
 
         return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/user/sub/{sub}")
+    public ResponseEntity<Object> getUserBySub(@PathVariable String sub) {
+
+        List<User> findResult = repository.findBySub(sub);
+
+        User savedUser;
+
+        String loginKey = "default_key";
+
+        if (findResult.isEmpty()) {
+            User user = new User(sub, loginKey);
+
+            Logger.getLogger("newUser").info(user.toString());
+
+            savedUser = repository.save(user);
+
+        } else {
+            savedUser = findResult.get(0);
+        }
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .replacePath("/")
+                .path("user/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @PutMapping(path = "/user/{id}")
