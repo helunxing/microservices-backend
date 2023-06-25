@@ -10,8 +10,8 @@ public class User {
     private long id;
 
     //    @ManyToOne
-    @Column(name = "sub_id")
-    private String subId;
+    @Column(name = "sub")
+    private String sub;
 
     @Column(name = "login_key")
     private String loginKey;
@@ -19,9 +19,9 @@ public class User {
     public User() {
     }
 
-    public User(String subId, String loginKey) {
+    public User(String sub, String loginKey) {
         super();
-        this.setSubId(subId);
+        this.setSub(sub);
         this.setLoginKey(loginKey);
     }
 
@@ -33,12 +33,12 @@ public class User {
         this.id = id;
     }
 
-    public String getSubId() {
-        return subId;
+    public String getSub() {
+        return sub;
     }
 
-    public void setSubId(String subId) {
-        this.subId = subId;
+    public void setSub(String subId) {
+        this.sub = subId;
     }
 
     public String getLoginKey() {
@@ -53,6 +53,6 @@ public class User {
     public String toString() {
         return String.format(
                 "User [id=%s, subId=%s, loginKey=%s]",
-                id, subId, loginKey);
+                id, sub, loginKey);
     }
 }

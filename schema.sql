@@ -12,7 +12,7 @@ create sequence user_id_seq start 1
 create table user_table
 (
     id        bigint default nextval('user_id_seq'),
-    sub_id    varchar(255),
+    sub       varchar(255),
     login_key varchar(255),
     primary key (id)
 );
