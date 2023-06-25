@@ -2,7 +2,7 @@
 GET http://localhost:8100/users
 
 ###
-GET http://localhost:8100/user/sub/subfromDefault_Data
+GET http://localhost:8100/user/sub/subfrom_DefaultData
 
 ### should be 201
 GET http://localhost:8100/user/sub/testsubfrom_unittest
