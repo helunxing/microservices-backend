@@ -9,7 +9,8 @@ Content-Type: application/json
   "creatorId": 1,
   "title": "Event 1",
   "date": "2019-01-01",
-  "timeOptions": "Event 1 timeOptions"
+  "timeOptions": "Event 1 timeOptions",
+  "address": "Event 1 address"
 }
 
 > {%
