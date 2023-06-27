@@ -23,24 +23,29 @@ public class Event {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "address")
+    private String address;
+
     public Event() {
     }
 
-    public Event(long id, String title, long creatorId, String date, String timeOptions) {
+    public Event(long id, String title, long creatorId, String date, String timeOptions, String address) {
         super();
         this.setId(id);
         this.setTitle(title);
         this.setCreatorId(creatorId);
         this.setDate(date);
         this.setTimeOptions(timeOptions);
+        this.setAddress(address);
     }
 
-    public Event(String title, long creatorId, String date, String timeOptions) {
+    public Event(String title, long creatorId, String date, String timeOptions, String address) {
         super();
         this.setTitle(title);
         this.setCreatorId(creatorId);
         this.setDate(date);
         this.setTimeOptions(timeOptions);
+        this.setAddress(address);
     }
 
 
@@ -84,10 +89,20 @@ public class Event {
         this.date = date;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Rows [id=%s, title=%s, creator_id=%s, date=%s, timeOptions=%s]",
-                id, title, creatorId, date, timeOptions);
+                "Rows [id=%s, title=%s, creator_id=%s, date=%s, timeOptions=%s, address=%s]",
+                id, title, creatorId, date, timeOptions, address);
     }
+
+
 }

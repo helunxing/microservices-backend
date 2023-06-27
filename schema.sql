@@ -24,6 +24,7 @@ create table event_table
     id           bigint default nextval('event_id_seq'),
     creator_id   bigint,
     title        text,
+    address      text,
     date         text,
     time_options text,
     primary key (id),
