@@ -78,7 +78,7 @@ public class EventController {
         Event savedEvent = repository.save(event);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .buildAndExpand(savedEvent.getId())
+                .buildAndExpand()
                 .toUri();
         return ResponseEntity.created(location).build();
 
