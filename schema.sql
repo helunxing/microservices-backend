@@ -36,9 +36,10 @@ create sequence join_id_seq start 1
     increment 1;
 create table join_table
 (
-    id       bigint default nextval('join_id_seq'),
-    user_id  bigint,
-    event_id bigint,
+    id          bigint default nextval('join_id_seq'),
+    user_id     bigint,
+    event_id    bigint,
+    options_str text,
     primary key (id),
     constraint fk_user_id
         foreign key (user_id) references user_table (id),

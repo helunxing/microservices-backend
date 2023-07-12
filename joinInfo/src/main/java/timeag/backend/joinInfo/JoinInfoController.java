@@ -1,6 +1,7 @@
 package timeag.backend.joinInfo;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -26,7 +27,7 @@ public class JoinInfoController {
         return "joinInfo microservice running";
     }
 
-    @PostMapping(path = "/joinInfo")
+    //    @PostMapping(path = "/joinInfo")
     public ResponseEntity<Join> newJoinInfo(@RequestBody Join join) {
         Logger.getLogger("newJoinInfo").info(join.toString());
         Join savedJoinInfo = repository.save(join);
@@ -39,28 +40,29 @@ public class JoinInfoController {
 
     @GetMapping(path = "/joinInfo/{id}")
     public ResponseEntity<Object> getJoinInfo(@PathVariable long id) {
-
-        Optional<Join> findResult = repository.findById(id);
-
-        if (findResult.isEmpty()) {
-            return Responses.NotFoundEntity();
+        Optional<Join> joinInfo = repository.findById(id);
+        if (joinInfo.isPresent()) {
+            return new ResponseEntity<>(joinInfo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
     }
 
-    @PutMapping(path = "/joinInfo/{id}")
-    public ResponseEntity<Object> updateJoinInfo(@PathVariable long id, @RequestBody Join join) {
+    @PutMapping(path = "/joinInfo")
+    public ResponseEntity<Object> updateJoinInfo(@RequestBody Join join) {
 
-        Optional<Join> findResult = repository.findById(id);
+        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
+        Join savedJoinInfo;
 
         if (findResult.isEmpty()) {
-            return Responses.NotFoundEntity();
+            System.out.println(join.toString());
+            savedJoinInfo = repository.save(join);
+        } else {
+            savedJoinInfo = findResult.remove(0);
+//            Maybe I should return error if the list is longer than one.
+            savedJoinInfo.setOptionsStr(join.getOptionsStr());
+            savedJoinInfo = repository.save(savedJoinInfo);
         }
-
-        join.setId(id);
-
-        Join savedJoinInfo = repository.save(join);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -72,7 +74,18 @@ public class JoinInfoController {
     @DeleteMapping(path = "/joinInfo/{id}")
     public ResponseEntity<Object> deleteJoinInfo(@PathVariable long id) {
         repository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/joinInfo")
+    public ResponseEntity<Object> deleteJoinInfoByID(@RequestBody Join join) {
+        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
+        if (findResult.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            repository.deleteById(findResult.remove(0).getId());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 }

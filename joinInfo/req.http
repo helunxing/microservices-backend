@@ -1,10 +1,11 @@
 ### should be 201
-POST localhost:8200/joinInfo
+PUT localhost:8200/joinInfo
 Content-Type: application/json
 
 {
   "userId": "1",
-  "eventId": "1"
+  "eventId": "1",
+  "optionsStr": "options from req.http"
 }
 
 > {%
@@ -15,12 +16,13 @@ Content-Type: application/json
 GET {{join_addr}}
 
 ### should be 201
-PUT {{join_addr}}
+PUT localhost:8200/joinInfo
 Content-Type: application/json
 
 {
   "userId": "1",
-  "eventId": "2"
+  "eventId": "1",
+  "optionsStr":"options from req.http changed"
 }
 
 ### should be 200

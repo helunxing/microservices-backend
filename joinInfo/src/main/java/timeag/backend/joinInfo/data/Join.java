@@ -14,6 +14,38 @@ public class Join {
     @Column(name = "event_id")
     private long eventId;
 
+    @Column(name = "options_str")
+    private String optionsStr;
+
+    public Join(long id, long userId, long eventId, String optionsStr) {
+        super();
+        this.setId(id);
+        this.setUserId(userId);
+        this.setEventId(eventId);
+        this.setOptionsStr(optionsStr);
+    }
+
+    public Join(long userId, long eventId, String optionsStr) {
+        super();
+        this.setUserId(userId);
+        this.setEventId(eventId);
+        this.setOptionsStr(optionsStr);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Join [id=%s, userId=%s, eventId=%s, optionsStr=%s]",
+                id, userId, eventId, optionsStr);
+    }
+
+    public String getOptionsStr() {
+        return optionsStr;
+    }
+
+    public void setOptionsStr(String optionsStr) {
+        this.optionsStr = optionsStr;
+    }
+
     public long getId() {
         return id;
     }
@@ -41,21 +73,4 @@ public class Join {
     public Join() {
     }
 
-    public Join(long id, long userId, long eventId) {
-        super();
-        this.setId(id);
-        this.setUserId(userId);
-        this.setEventId(eventId);
-    }
-
-    public Join(long userId, long eventId) {
-        super();
-        this.setUserId(userId);
-        this.setEventId(eventId);
-    }
-
-    @Override
-    public String toString() {
-        return "Join [id=" + id + ", userId=" + userId + ", eventId=" + eventId + "]";
-    }
 }
