@@ -8,6 +8,6 @@ import java.util.Optional;
 
 
 public interface JoinInfoJpaRepository extends JpaRepository<Join, Long> {
-    @Query("SELECT j FROM Join_table j WHERE j.eventId = ?1 AND j.userId = ?2")
+    @Query("SELECT j FROM Join_table j WHERE j.eventID = ?1 AND j.joinerID = ?2")
     List<Join> findByEventUserPair(long eventId, long userId);
 }

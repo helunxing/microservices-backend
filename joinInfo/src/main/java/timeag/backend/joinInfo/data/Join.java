@@ -9,41 +9,41 @@ public class Join {
     private long id;
 
     @Column(name = "user_id")
-    private long userId;
+    private long joinerID;
 
     @Column(name = "event_id")
-    private long eventId;
+    private long eventID;
 
     @Column(name = "options_str")
-    private String optionsStr;
+    private String selectedStr;
 
-    public Join(long id, long userId, long eventId, String optionsStr) {
+    public Join(long id, long joinerID, long eventID, String selectedStr) {
         super();
         this.setId(id);
-        this.setUserId(userId);
-        this.setEventId(eventId);
-        this.setOptionsStr(optionsStr);
+        this.setJoinerID(joinerID);
+        this.setEventID(eventID);
+        this.setSelectedStr(selectedStr);
     }
 
-    public Join(long userId, long eventId, String optionsStr) {
+    public Join(long joinerID, long eventID, String selectedStr) {
         super();
-        this.setUserId(userId);
-        this.setEventId(eventId);
-        this.setOptionsStr(optionsStr);
+        this.setJoinerID(joinerID);
+        this.setEventID(eventID);
+        this.setSelectedStr(selectedStr);
     }
 
     @Override
     public String toString() {
         return String.format("Join [id=%s, userId=%s, eventId=%s, optionsStr=%s]",
-                id, userId, eventId, optionsStr);
+                id, joinerID, eventID, selectedStr);
     }
 
-    public String getOptionsStr() {
-        return optionsStr;
+    public String getSelectedStr() {
+        return selectedStr;
     }
 
-    public void setOptionsStr(String optionsStr) {
-        this.optionsStr = optionsStr;
+    public void setSelectedStr(String optionsStr) {
+        this.selectedStr = optionsStr;
     }
 
     public long getId() {
@@ -54,20 +54,20 @@ public class Join {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public long getJoinerID() {
+        return joinerID;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setJoinerID(long userId) {
+        this.joinerID = userId;
     }
 
-    public long getEventId() {
-        return eventId;
+    public long getEventID() {
+        return eventID;
     }
 
-    public void setEventId(long eventId) {
-        this.eventId = eventId;
+    public void setEventID(long eventId) {
+        this.eventID = eventId;
     }
 
     public Join() {

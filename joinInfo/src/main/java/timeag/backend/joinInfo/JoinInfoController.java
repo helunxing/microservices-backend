@@ -51,7 +51,7 @@ public class JoinInfoController {
     @PutMapping(path = "/joinInfo")
     public ResponseEntity<Object> updateJoinInfo(@RequestBody Join join) {
 
-        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
+        List<Join> findResult = repository.findByEventUserPair(join.getEventID(), join.getJoinerID());
         Join savedJoinInfo;
 
         if (findResult.isEmpty()) {
@@ -60,7 +60,7 @@ public class JoinInfoController {
         } else {
             savedJoinInfo = findResult.remove(0);
 //            Maybe I should return error if the list is longer than one.
-            savedJoinInfo.setOptionsStr(join.getOptionsStr());
+            savedJoinInfo.setSelectedStr(join.getSelectedStr());
             savedJoinInfo = repository.save(savedJoinInfo);
         }
 
@@ -80,7 +80,7 @@ public class JoinInfoController {
 
     @DeleteMapping(path = "/joinInfo")
     public ResponseEntity<Object> deleteJoinInfoByID(@RequestBody Join join) {
-        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
+        List<Join> findResult = repository.findByEventUserPair(join.getEventID(), join.getJoinerID());
         if (findResult.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
