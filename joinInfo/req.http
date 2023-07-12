@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "userId": "1",
   "eventId": "1",
-  "optionsStr": "options from req.http"
+  "selectedStr": "options from req.http"
 }
 
 > {%
@@ -22,7 +22,7 @@ Content-Type: application/json
 {
   "userId": "1",
   "eventId": "1",
-  "optionsStr":"options from req.http changed"
+  "selectedStr":"options from req.http changed"
 }
 
 ### should be 200
