@@ -51,7 +51,7 @@ public class JoinInfoController {
     @PutMapping(path = "/joinInfo")
     public ResponseEntity<Object> updateJoinInfo(@RequestBody Join join) {
 
-        List<Join> findResult = repository.findByEventUserPair(join.getEventID(), join.getJoinerID());
+        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
         Join savedJoinInfo;
 
         if (findResult.isEmpty()) {
@@ -74,13 +74,13 @@ public class JoinInfoController {
     @DeleteMapping(path = "/joinInfo/{id}")
     public ResponseEntity<Object> deleteJoinInfo(@PathVariable long id) {
         repository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/joinInfo")
     public ResponseEntity<Object> deleteJoinInfoByID(@RequestBody Join join) {
-        List<Join> findResult = repository.findByEventUserPair(join.getEventID(), join.getJoinerID());
+        List<Join> findResult = repository.findByEventUserPair(join.getEventId(), join.getUserId());
         if (findResult.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

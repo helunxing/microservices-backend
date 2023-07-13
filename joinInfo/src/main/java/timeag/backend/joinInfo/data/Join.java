@@ -9,33 +9,33 @@ public class Join {
     private long id;
 
     @Column(name = "user_id")
-    private long joinerID;
+    private long userId;
 
     @Column(name = "event_id")
-    private long eventID;
+    private long eventId;
 
     @Column(name = "options_str")
     private String selectedStr;
 
-    public Join(long id, long joinerID, long eventID, String selectedStr) {
+    public Join(long id, long userId, long eventId, String selectedStr) {
         super();
         this.setId(id);
-        this.setJoinerID(joinerID);
-        this.setEventID(eventID);
+        this.setUserId(userId);
+        this.setEventId(eventId);
         this.setSelectedStr(selectedStr);
     }
 
-    public Join(long joinerID, long eventID, String selectedStr) {
+    public Join(long userId, long eventId, String selectedStr) {
         super();
-        this.setJoinerID(joinerID);
-        this.setEventID(eventID);
+        this.setUserId(userId);
+        this.setEventId(eventId);
         this.setSelectedStr(selectedStr);
     }
 
     @Override
     public String toString() {
         return String.format("Join [id=%s, userId=%s, eventId=%s, optionsStr=%s]",
-                id, joinerID, eventID, selectedStr);
+                id, userId, eventId, selectedStr);
     }
 
     public String getSelectedStr() {
@@ -54,20 +54,20 @@ public class Join {
         this.id = id;
     }
 
-    public long getJoinerID() {
-        return joinerID;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setJoinerID(long userId) {
-        this.joinerID = userId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public long getEventID() {
-        return eventID;
+    public long getEventId() {
+        return eventId;
     }
 
-    public void setEventID(long eventId) {
-        this.eventID = eventId;
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public Join() {
