@@ -27,6 +27,7 @@ create table event_table
     address      text,
     date         text,
     time_options text,
+    votes_counts text,
     primary key (id),
     constraint fk_creator_id
         foreign key (creator_id) references user_table (id)
