@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -40,6 +41,12 @@ public class EventController {
     public ResponseEntity<Event> newEvent(@RequestBody Event event) {
 
         Logger.getLogger("newEvent").info(event.toString());
+
+        // create default votesCounts
+        int numberOfOptions = event.getTimeOptions()
+                .split(",").length;
+        String emptyVoteStr = String.join(",", Collections.nCopies(numberOfOptions, "0"));
+        event.setVotesCounts(emptyVoteStr);
 
         Event savedEvent = repository.save(event);
 
@@ -87,6 +94,21 @@ public class EventController {
     @DeleteMapping(path = "/event/{id}")
     public ResponseEntity<Object> deleteEvent(@PathVariable long id) {
         repository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/vote/{id}")
+    public ResponseEntity<Object> putVoteInfo(@PathVariable long id, @RequestBody Event event) {
+        System.out.println(event);
+        Optional<Event> eventInDB = repository.findById(event.getId());
+        if (eventInDB.isEmpty()) {
+            return Responses.NotFoundEntity();
+        }
+        Event newEvent = eventInDB.get();
+        newEvent.voteTimeOption(event.getTimeOptions());
+
+        newEvent.setTimeOptions(event.getTimeOptions());
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
