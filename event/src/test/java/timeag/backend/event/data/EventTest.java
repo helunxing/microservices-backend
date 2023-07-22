@@ -32,4 +32,16 @@ class EventTest {
         event.voteTimeOption("time3,time2");
         assertEquals("1,2,2", event.getVotesCounts());
     }
+
+    @DisplayName("test merge new time options")
+    @Test
+    void mergeNewTimeOptions() {
+        event.voteTimeOption("time2");
+        event.voteTimeOption("time3");
+        event.voteTimeOption("time4");
+        event.mergeNewTimeOptions("time1,time3,time4");
+        assertEquals("time1,time3,time4", event.getTimeOptions());
+        event.voteTimeOption("time4");
+        assertEquals("0,1,1", event.getVotesCounts());
+    }
 }

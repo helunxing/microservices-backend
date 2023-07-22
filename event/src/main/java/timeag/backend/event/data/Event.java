@@ -1,8 +1,9 @@
 package timeag.backend.event.data;
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -45,6 +46,10 @@ public class Event {
         this.setDate(date);
         this.setTimeOptions(timeOptions);
         this.setAddress(address);
+        // create default votesCounts
+        int numberOfOptions = this.getTimeOptions().split(",").length;
+        String emptyVoteStr = String.join(",", Collections.nCopies(numberOfOptions, "0"));
+        this.setVotesCounts(emptyVoteStr);
     }
 
     public Event(String title, long creatorId, String date, String timeOptions, String address) {
@@ -54,6 +59,10 @@ public class Event {
         this.setDate(date);
         this.setTimeOptions(timeOptions);
         this.setAddress(address);
+        // create default votesCounts
+        int numberOfOptions = this.getTimeOptions().split(",").length;
+        String emptyVoteStr = String.join(",", Collections.nCopies(numberOfOptions, "0"));
+        this.setVotesCounts(emptyVoteStr);
     }
 
     public Event(long id, String timeOptions) {
@@ -65,11 +74,17 @@ public class Event {
     public void voteTimeOption(String input_timeOptions) {
         List<String> inputVoteArr = List.of(input_timeOptions.split(","));
         List<String> timeOptionsArr = List.of(this.getTimeOptions().split(","));
-        List<Integer> votesCountsArr = new java.util.ArrayList<>(Stream.of(this.getVotesCounts().split(","))
+        List<Integer> votesCountsArr = new ArrayList<>(Stream.of(this.getVotesCounts().split(","))
                 .map(Integer::parseInt).toList());
 
         for (String inputVote : inputVoteArr) {
             int index = timeOptionsArr.indexOf(inputVote);
+            if (index == -1) {
+                Logger.getLogger("EventVoteChange").warning(
+                        String.format("target single vote '%s' not in Options. ignore it",
+                                inputVote));
+                continue;
+            }
             votesCountsArr.set(index, votesCountsArr.get(index) + 1);
         }
 
@@ -79,6 +94,38 @@ public class Event {
                 String.format("voteTimeOption: %s. votesCounts result: %s",
                         input_timeOptions, this.getVotesCounts()));
 
+    }
+
+    public void mergeNewTimeOptions(String input_timeOptions) {
+        List<String> inputVoteArr = List.of(input_timeOptions.split(","));
+        List<Integer> oldVotesCountsArr = new ArrayList<>(Stream.of(this.getVotesCounts().split(","))
+                .map(Integer::parseInt).toList());
+        List<String> timeOptionsArr = List.of(this.getTimeOptions().split(","));
+        List<Integer> newVotesCountsArr = new ArrayList<>();
+
+        for (String inputVote : inputVoteArr) {
+            int index = timeOptionsArr.indexOf(inputVote);
+            if (index == -1) {
+                newVotesCountsArr.add(0);
+                Logger.getLogger("mergeNewTimeOptions").info(
+                        String.format("target single option '%s' is not present in old. create 0 for it",
+                                inputVote));
+                continue;
+            }
+
+            Integer oldVoteCount = oldVotesCountsArr.get(index);
+            newVotesCountsArr.add(oldVoteCount);
+            Logger.getLogger("mergeNewTimeOptions").info(
+                    String.format("target single option '%s' vote count have move to new. keep '%s' value",
+                            inputVote, oldVoteCount));
+        }
+
+        this.setTimeOptions(input_timeOptions);
+        this.setVotesCounts(String.join(",", newVotesCountsArr.stream().map(String::valueOf).toList()));
+
+        Logger.getLogger("mergeNewTimeOptions").info(
+                String.format("done. target options: %s. result event: %s",
+                        input_timeOptions, this));
     }
 
     public long getId() {
@@ -133,7 +180,7 @@ public class Event {
         return votesCounts;
     }
 
-    public void setVotesCounts(String votesCounts) {
+    private void setVotesCounts(String votesCounts) {
         this.votesCounts = votesCounts;
     }
 
