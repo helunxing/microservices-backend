@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -42,12 +41,6 @@ public class EventController {
 
         Logger.getLogger("newEvent").info(event.toString());
 
-        // create default votesCounts
-        int numberOfOptions = event.getTimeOptions()
-                .split(",").length;
-        String emptyVoteStr = String.join(",", Collections.nCopies(numberOfOptions, "0"));
-        event.setVotesCounts(emptyVoteStr);
-
         Event savedEvent = repository.save(event);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -81,8 +74,9 @@ public class EventController {
         }
 
         event.setId(id);
-
-        Event savedEvent = repository.save(event);
+        Event oldEvent = findResult.get();
+        oldEvent.updateEvent(event);
+        repository.save(oldEvent);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .buildAndExpand()
