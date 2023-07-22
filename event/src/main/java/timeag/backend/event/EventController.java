@@ -31,7 +31,7 @@ public class EventController {
         Iterable<Event> allEvent = repository.findAll();
         if (!allEvent.iterator().hasNext()) {
 //            maybe return 404 is not a good idea?
-            return Responses.NotFoundEntity();
+            return Responses.NotFoundEntity("There is no event in database.");
         }
         return new ResponseEntity<>(allEvent, HttpStatus.OK);
     }
@@ -58,7 +58,7 @@ public class EventController {
         Optional<Event> findResult = repository.findById(id);
 
         if (findResult.isEmpty()) {
-            return Responses.NotFoundEntity();
+            return Responses.NotFoundEntity("Event with id " + id + " not found.");
         }
 
         return new ResponseEntity<>(findResult.get(), HttpStatus.OK);
@@ -70,7 +70,7 @@ public class EventController {
         Optional<Event> findResult = repository.findById(id);
 
         if (findResult.isEmpty()) {
-            return Responses.NotFoundEntity();
+            return Responses.NotFoundEntity("Event with id " + id + " not found.");
         }
 
         event.setId(id);
