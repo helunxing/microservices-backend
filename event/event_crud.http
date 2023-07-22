@@ -9,7 +9,7 @@ Content-Type: application/json
   "creatorId": 1,
   "title": "Event 1",
   "date": "2019-01-01",
-  "timeOptions": "Event 1 timeOptions",
+  "timeOptions": "17:02_17:32,17:03_17:33,17:03_17:33",
   "address": "Event 1 address"
 }
 
