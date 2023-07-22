@@ -1,0 +1,8 @@
+### should be 201
+PUT http://localhost:8000/vote/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "timeOptions": "form vote"
+}
