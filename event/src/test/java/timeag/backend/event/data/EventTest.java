@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EventTest {
-    private static Event event;
+    private Event event;
 
     @BeforeEach
     public void setUp() {
