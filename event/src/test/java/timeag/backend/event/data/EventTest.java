@@ -11,13 +11,13 @@ class EventTest {
 
     @BeforeEach
     public void setUp() {
-        event = new Event();
-        event.setTitle("title");
-        event.setCreatorId(1);
-        event.setDate("date");
-        event.setTimeOptions("time1,time2,time3");
-        event.setVotesCounts("0,0,0");
-        event.setAddress("address");
+        event = new Event("title", 1, "date", "time1,time2,time3", "address");
+    }
+
+    @DisplayName("test create votes counts")
+    @Test
+    void createVotesCounts() {
+        assertEquals("0,0,0", event.getVotesCounts());
     }
 
     @DisplayName("test vote for single time option")
