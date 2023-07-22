@@ -1,8 +1,17 @@
-### should be 201
+### should be 200
 PUT http://localhost:8000/vote/1
 Content-Type: application/json
 
 {
   "id": 1,
-  "timeOptions": "form vote"
+  "timeOptions": "17:02_17:32"
+}
+
+### should be 200
+PUT http://localhost:8000/devote/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "timeOptions": "17:02_17:32"
 }

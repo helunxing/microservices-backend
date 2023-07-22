@@ -72,6 +72,10 @@ public class Event {
     }
 
     public void voteTimeOption(String input_timeOptions) {
+        voteTimeOption(input_timeOptions, 1);
+    }
+
+    public void voteTimeOption(String input_timeOptions, int voteNumber) {
         List<String> inputVoteArr = List.of(input_timeOptions.split(","));
         List<String> timeOptionsArr = List.of(this.getTimeOptions().split(","));
         List<Integer> votesCountsArr = new ArrayList<>(Stream.of(this.getVotesCounts().split(","))
@@ -85,7 +89,11 @@ public class Event {
                                 inputVote));
                 continue;
             }
-            votesCountsArr.set(index, votesCountsArr.get(index) + 1);
+            int voteResult = votesCountsArr.get(index) + voteNumber;
+            if (voteResult < 0) {
+                voteResult = 0;
+            }
+            votesCountsArr.set(index, voteResult);
         }
 
         this.setVotesCounts(String.join(",", votesCountsArr.stream().map(String::valueOf).toList()));

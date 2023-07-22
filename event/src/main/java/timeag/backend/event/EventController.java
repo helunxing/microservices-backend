@@ -91,8 +91,7 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(path = "/vote/{id}")
-    public ResponseEntity<Object> upVote(@PathVariable long id, @RequestBody Event requestEvent) {
+    public ResponseEntity<Object> vote(long id, Event requestEvent, int voteNumber) {
         Optional<Event> dBFoundEvent = repository.findById(id);
 
         if (dBFoundEvent.isEmpty()) {
@@ -100,10 +99,19 @@ public class EventController {
         }
 
         Event eventInDB = dBFoundEvent.get();
-        eventInDB.voteTimeOption(requestEvent.getTimeOptions());
+        eventInDB.voteTimeOption(requestEvent.getTimeOptions(), voteNumber);
         repository.save(eventInDB);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping(path = "/vote/{id}")
+    public ResponseEntity<Object> upVote(@PathVariable long id, @RequestBody Event requestEvent) {
+        return vote(id, requestEvent, 1);
+    }
+
+    @PutMapping(path = "/devote/{id}")
+    public ResponseEntity<Object> deVote(@PathVariable long id, @RequestBody Event requestEvent) {
+        return vote(id, requestEvent, -1);
+    }
 }
