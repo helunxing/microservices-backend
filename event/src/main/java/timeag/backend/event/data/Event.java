@@ -128,6 +128,16 @@ public class Event {
                         input_timeOptions, this));
     }
 
+    public void updateEvent(Event newEvent) {
+        this.setTitle(title);
+        this.setCreatorId(creatorId);
+        this.setDate(date);
+        this.setTimeOptions(timeOptions);
+        this.setAddress(address);
+        this.mergeNewTimeOptions(newEvent.getTimeOptions());
+        Logger.getLogger("updateEvent").info("update result: " + this);
+    }
+
     public long getId() {
         return id;
     }
