@@ -92,16 +92,16 @@ public class EventController {
     }
 
     @PutMapping(path = "/vote/{id}")
-    public ResponseEntity<Object> putVoteInfo(@PathVariable long id, @RequestBody Event event) {
-        System.out.println(event);
-        Optional<Event> eventInDB = repository.findById(event.getId());
-        if (eventInDB.isEmpty()) {
-            return Responses.NotFoundEntity();
-        }
-        Event newEvent = eventInDB.get();
-        newEvent.voteTimeOption(event.getTimeOptions());
+    public ResponseEntity<Object> upVote(@PathVariable long id, @RequestBody Event requestEvent) {
+        Optional<Event> dBFoundEvent = repository.findById(id);
 
-        newEvent.setTimeOptions(event.getTimeOptions());
+        if (dBFoundEvent.isEmpty()) {
+            return Responses.NotFoundEntity("Event with id " + id + " not found.");
+        }
+
+        Event eventInDB = dBFoundEvent.get();
+        eventInDB.voteTimeOption(requestEvent.getTimeOptions());
+        repository.save(eventInDB);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
