@@ -4,6 +4,7 @@ import queue
 import random
 
 from fastapi import FastAPI
+from fastapi.responses import Response
 from loguru import logger
 from os.path import dirname, abspath, join
 
@@ -16,7 +17,7 @@ app = FastAPI()
 
 @app.get("/")
 def running_notice():
-    return "postcode microservice running"
+    return Response(content="postcode microservice running", media_type="text/plain")
 
 
 @app.get("/{postcode}")

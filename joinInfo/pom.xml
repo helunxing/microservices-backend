@@ -12,9 +12,12 @@
     </parent>
 
     <groupId>hlx</groupId>
+
     <artifactId>joinInfo</artifactId>
+
     <version>0.0.1-SNAPSHOT</version>
-    <name>event-api</name><!--this is for kubernetes-->
+
+    <name>join-api</name><!--this is for kubernetes-->
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -60,7 +63,7 @@
     </dependencies>
 
     <build>
-        <finalName>your-jar-name</finalName>
+        <finalName>jar-name</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
