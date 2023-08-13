@@ -8,12 +8,7 @@ from fastapi.responses import Response
 from loguru import logger
 from os.path import dirname, abspath, join
 
-default_val = "default"
-env_val = os.getenv("ENV_VAR")
-val = env_val if env_val else default_val
-
 app = FastAPI()
-
 
 @app.get("/")
 def running_notice():
